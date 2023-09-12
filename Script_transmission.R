@@ -32,6 +32,7 @@ library(jtools)
 
 ####Recesses####
 d<-read.table("Script & Datasets/Recesses.txt",sep="\t",h=T)
+d<-d[d$recess_size_max>2,]
 
 ##1. Occurrence of extended recesses##
 #Time window choice
@@ -89,8 +90,8 @@ ggplot() +
         axis.title=element_text(size=18,face="bold"),
         axis.title.x = element_text(margin = unit(c(3, 0, 0, 0), "mm")),
         axis.title.y = element_text(margin = unit(c(0, 5, 0, 0), "mm")))+
-  annotate("text", x=24, y=0.15, label= "R²m = 0.21", size=5)+
-  annotate("text", x=24, y=0.14, label= "R²c = 0.43", size=5)
+  annotate("text", x=24, y=0.15, label= "RÂ²m = 0.21", size=5)+
+  annotate("text", x=24, y=0.14, label= "RÂ²c = 0.43", size=5)
 
 
 ##2. Duration of extended recesses##
@@ -155,8 +156,8 @@ ggplot(predict_int, aes(x=x, y=predicted, group=group, linetype=Type))+
         legend.text = element_text(face = "plain", size = 14), 
         legend.spacing.y = unit(.5, 'cm'))+
   scale_fill_manual(values=c("hotpink2", "tan1", "cadetblue"), name="Body condition", labels=c('41.3', '57.8', '68.2'))+
-  annotate("text", x=19, y=750, label= "R²m = 0.15", size=7)+
-  annotate("text", x=19, y=700, label= "R²c = 0.23", size=7)+ 
+  annotate("text", x=19, y=750, label= "RÂ²m = 0.15", size=7)+
+  annotate("text", x=19, y=700, label= "RÂ²c = 0.23", size=7)+ 
   guides(linetype="none")
 
 ##3. Duration of short recesses##
@@ -198,8 +199,8 @@ ggplot(data = df_RC6, aes(y=recess_size_max,x=previous_temperature6)) +
         legend.title = element_text(color = "black", size = 16),
         legend.text = element_text(face = "plain", size = 14), 
         legend.spacing.y = unit(.5, 'cm'))+
-  annotate("text", x=25, y=150, label= "R²m = 0.002", size=7)+
-  annotate("text", x=25, y=140, label= "R²c = 0.063", size=7)
+  annotate("text", x=25, y=150, label= "RÂ²m = 0.002", size=7)+
+  annotate("text", x=25, y=140, label= "RÂ²c = 0.063", size=7)
 
 ####TDR####
 rm(list=ls())
@@ -234,7 +235,7 @@ ggplot(data = df_courts, aes(y=TDR_begin,x=temperature_during_24hperiod)) +
   geom_point(position = "jitter", alpha = 0.5)+
   geom_line(data = fitdata_court, aes(y=fit), colour="black", size=0.5)+
   geom_ribbon(data = fitdata_court, aes(y=fit, ymin=lower, ymax=upper), alpha=0.4, colour = "white", fill="grey")+
-  xlab("Mean daily ground temperature (°C)") +
+  xlab("Mean daily ground temperature (Â°C)") +
   ylab("TDR (minutes)
 for days with
 only short recesses")+
@@ -247,8 +248,8 @@ only short recesses")+
         legend.title = element_text(color = "black", size = 16),
         legend.text = element_text(face = "plain", size = 14), 
         legend.spacing.y = unit(.5, 'cm'))+
-  annotate("text", x=17, y=630, label= "R²m = 0.14", size=7)+
-  annotate("text", x=17, y=580, label= "R²c = 0.57", size=7)
+  annotate("text", x=17, y=630, label= "RÂ²m = 0.14", size=7)+
+  annotate("text", x=17, y=580, label= "RÂ²c = 0.57", size=7)
 
 ##2. TDR for days with extended recesses##
 df_longs<-d2[d2$TDR_long>0,]
@@ -288,7 +289,7 @@ ggplot(predict_TDRlong, aes(x, predicted, fill=`Body condition`, linetype=Type))
   scale_linetype_manual(values=c("dashed", "solid"))+
   geom_line(size=0.7) +
   geom_ribbon(aes(ymin = conf.low, ymax = conf.high), alpha = .25)+
-  labs(x = "Mean daily ground temperature (°C)",
+  labs(x = "Mean daily ground temperature (Â°C)",
        y = "TDR (minutes)
 for days with short
 and extended recesses")+
@@ -302,5 +303,5 @@ and extended recesses")+
         legend.text = element_text(face = "plain", size = 14), 
         legend.spacing.y = unit(.5, 'cm'))+
   scale_fill_manual(values=c("hotpink2", "tan1", "cadetblue"), name="Body condition", labels=c('41.3', '57.8', '68.2'))+
-  annotate("text", x=14, y=1100, label= "R²m = 0.23", col="black", size=7)+
-  annotate("text", x=14, y=1000, label= "R²c = 0.47", col="black", size=7)+ guides(linetype="none")
+  annotate("text", x=14, y=1100, label= "RÂ²m = 0.23", col="black", size=7)+
+  annotate("text", x=14, y=1000, label= "RÂ²c = 0.47", col="black", size=7)+ guides(linetype="none")
